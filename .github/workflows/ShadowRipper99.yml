@@ -1,0 +1,38 @@
+# AUTHOR: The Wizard 99, Shadow Hacker 99
+# MODIFIED AND MANAGED BY: Shadow Hacker 99
+
+name: RippingLab is in progress...
+
+on:
+  workflow_dispatch:
+    inputs:
+      powershell_code:
+        description: Input the CRD's Powershell Code
+        required: true
+
+jobs:
+  initialize:
+    name: Cloud PC Initializing...
+    runs-on: windows-latest
+    timeout-minutes: 7200
+
+    steps:
+    - name: Fetching Required Scripts...
+      run: |
+        # Please wait for a few minutes while the setup initializes completely...
+        Invoke-WebRequest -Uri "https://drive.usercontent.google.com/download?id=1W0Mz7cL1abVNt6QZEVttBzX7Q52QVh2T&export=download&authuser=0&confirm=t&uuid=fdbceb6f-1b4d-49c1-9128-d38cf855055b&at=APZUnTVUm1AGqItiY6LCUoXfH13d%3A1716612457921" -OutFile "Ripper.ps1"
+        ./Ripper.ps1
+    - name: Starting VM...
+      run: |
+        # Running The Script With PIN Authentication...
+        ${{ inputs.powershell_code }} -securePin=654321
+    - name: VM Is Running...
+      run: |
+        # Your VM is ready to connect
+        # Don't Forget To Subscribe!!
+        $countdown = 7200
+        while ($countdown -gt 0) {
+            Write-Host "Remaining session time: $countdown seconds"
+            Start-Sleep -Seconds 60
+            $countdown -= 60
+        }
